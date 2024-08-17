@@ -1,5 +1,5 @@
 {
-  "name": "llm-proxy",
+  "name": "llm-proxy-core",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
