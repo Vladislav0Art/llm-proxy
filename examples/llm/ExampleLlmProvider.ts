@@ -1,7 +1,7 @@
 import { Readable } from 'stream';
-import { BaseLlmProvider } from '../../core/llm/providers/BaseLlmProvider';
-import { LlmChatMessage } from '../../core/llm/providers/messages/LlmMessages';
-import { StreamWrapper } from '../../core/llm/providers/StreamWrapper';
+import { LlmChatMessage } from '../../packages/core/llm/providers/messages/LlmMessages';
+import { StreamWrapper } from '../../packages/core/llm/providers/StreamWrapper';
+import { BaseLlmProvider } from '../../packages/core/llm/providers/BaseLlmProvider';
 
 
 export class ExampleLlmProvider extends BaseLlmProvider {

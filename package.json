@@ -1,16 +1,17 @@
 {
-  "name": "llm-proxy-core",
-  "version": "0.0.1",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "@llm-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/openai"
+  ],
+  "scripts": {},
   "keywords": [],
-  "author": "",
+  "author": "Vladislav0Art",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "dotenv": "^16.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
