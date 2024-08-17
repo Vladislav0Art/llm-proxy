@@ -7,10 +7,9 @@ export class ExampleLlmProvider extends BaseLlmProvider {
     super({ token: "token", model: "model" });
   }
 
-  sendMessages(messages: LlmChatMessage[]): StreamWrapper {
+  async sendMessages(messages: LlmChatMessage[]): Promise<StreamWrapper> {
     const stream = new Readable({
-      read() {
-      }, // No-op, we will push data manually
+      read() {} // No-op, we will push data manually
     });
 
     // Simulate an API that sends chunks of data over time
@@ -27,7 +26,7 @@ export class ExampleLlmProvider extends BaseLlmProvider {
       }
     }, 100); // Simulate receiving chunks every second
 
-    return new StreamWrapper(stream);
+    return Promise.resolve(new StreamWrapper(stream));
   }
 
   countMessagesTokens(messages: LlmChatMessage[]): number {

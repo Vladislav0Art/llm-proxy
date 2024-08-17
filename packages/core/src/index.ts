@@ -1,7 +1,6 @@
 export {
   AiChatConfig,
   SendParams,
-  IAiChat,
   AiChat,
 } from './llm/chat/AiChat';
 

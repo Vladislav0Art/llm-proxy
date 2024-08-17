@@ -15,7 +15,7 @@ export abstract class BaseLlmProvider {
     this.model = model;
   }
 
-  abstract sendMessages(messages: LlmChatMessage[]): StreamWrapper;
+  abstract sendMessages(messages: LlmChatMessage[]): Promise<StreamWrapper>;
   abstract countMessagesTokens(messages: LlmChatMessage[]): number;
   abstract countTextTokens(text: string): number;
   abstract getTokenLimit(): number;

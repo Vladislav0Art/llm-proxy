@@ -17,12 +17,7 @@ export interface SendParams {
   message: string;
 }
 
-export interface IAiChat {
-  send(params: SendParams): StreamWrapper
-  history(): LlmChatMessage[]
-}
-
-export class AiChat implements IAiChat {
+export class AiChat {
   private static defaultConfig: AiChatConfig = {
     preserveHistory: true,
     systemPrompt: null,
@@ -39,7 +34,7 @@ export class AiChat implements IAiChat {
     this.provider = provider;
   }
 
-  withConfig(config: AiChatConfig): IAiChat {
+  withConfig(config: AiChatConfig): AiChat {
     this.config = config;
     if (this.config.systemPrompt !== null) {
       this._systemMessage = new SystemLlmChatMessage(this.config.systemPrompt);
@@ -51,7 +46,7 @@ export class AiChat implements IAiChat {
     return new AiChat(provider);
   }
 
-  send({ message }: SendParams): StreamWrapper {
+  async send({ message }: SendParams): Promise<StreamWrapper> {
     if (!this.config.preserveHistory) {
       // purge history
       this._history.length = 0;
@@ -61,16 +56,18 @@ export class AiChat implements IAiChat {
     const messages: LlmChatMessage[] = this._systemMessage ?
       [this._systemMessage, ...this._history] : this._history;
 
-    const wrapper = this.provider.sendMessages(messages);
+    const wrapper = await this.provider.sendMessages(messages);
     const responseChunks: string[] = [];
 
-    return wrapper.data((chunk: string) => responseChunks.push(chunk))
+    wrapper.data((chunk: string) => responseChunks.push(chunk))
       .end(() => {
         // save AI's response in history
         if (this.config.preserveHistory) {
           this._history.push(new AssistantLlmChatMessage(responseChunks.join("")))
         }
-      });
+      })
+
+    return Promise.resolve(wrapper);
   }
 
   history(): LlmChatMessage[] {
