@@ -1,7 +1,6 @@
 import { describe, it } from 'vitest';
-// import { ExampleLlmProvider } from '../src/examples/llm/ExampleLlmProvider';
-// import { UserLlmChatMessage } from '../src/packages/core/llm/providers/messages/LlmMessages';
-// import { AiChat } from '../src/packages/core/llm/chat/AiChat';
+import { ExampleLlmProvider } from '../examples/llm/ExampleLlmProvider';
+import { UserLlmChatMessage, AiChat } from '@llm-proxy/core';
 
 
 describe('LLM', () => {

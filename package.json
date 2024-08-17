@@ -6,7 +6,10 @@
     "packages/core",
     "packages/openai"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "npm run build --workspace packages/core && npm run build --workspace packages/openai",
+    "test": "vitest run"
+  },
   "keywords": [],
   "author": "Vladislav0Art",
   "license": "ISC",
